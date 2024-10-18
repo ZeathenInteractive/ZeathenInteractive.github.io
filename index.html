@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeathen Interactive</title>
+    <!-- <link rel="stylesheet" href="Styles/styles.css">  -->
+    <link rel="stylesheet" href="Styles/general.css">
+    <link rel="stylesheet" href="Styles/other.css">
+    <link rel="stylesheet" href="Styles/nav.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css">
+    <!-- <link rel="stylesheet" href="Styles/navbar.css"> 
+    <link rel="stylesheet" href="Styles/main.css">
+    <link rel="stylesheet" href="Styles/games.css">
+    <link rel="stylesheet" href="Styles/about-contact.css">
+    <link rel="stylesheet" href="Styles/footer.css"> -->
+
+    <style>
+        html, body {
+            font-family: "Dosis", sans-serif;
+            height: 90vh;
+            margin: 0;
+            scroll-behavior: smooth;
+        }
+        .full-screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+      
+        .about {
+            height: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        @media (min-width: 768px) {
+            .about-contact-container {
+                flex-direction: row;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="full-screen static-screen">
+        <canvas id="particleCanvas"></canvas>
+        <div class="screen-content">
+            <h1 id="typewriter"></h1>
+            <p style="font-size: 18px;"">Your source for minimalistic mobile games</p>
+        </div>
+    </section>
+    
+    
+    
+
+    <section id="games" class="full-screen" style="background-image: url('green to yellow.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <h1 style="margin-bottom: 40px;">Our Games</h1>
+        <p style="margin-bottom: 30px;">Explore our portfolio of fun and engaging games.</p>
+    
+        <div class="games-container">
+            <a href="https://play.google.com/store/apps/details?id=com.zeathen.huegame&hl=en" class="polaroid-link" style="text-decoration: none;">
+                <div class="polaroid-card">
+                    <div class="image-container">
+                        <img src="playstore-icon.png" alt="Game Image" class="game-photo">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="game-title">Hueniverse</h3>
+                        <p class="game-description">Sort color hues in the right order in this endless and challenging puzzle game!</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+        
+        
+    </section>
+    
+    <div class="about-contact-container">
+        <section id="about" class="about" style="background-image: url('green to yellow.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <h2>About Us</h2>
+            <p>Zeathen Interactive is a small team creating simple, fun mobile games—perfect for when you've got a few minutes to spare and just want to kick back.</p>
+            <h2>Contact Us</h2>
+            <p>Email us at: <a href="mailto:zeatheninteractive@gmail.com">zeatheninteractive@gmail.com</a></p>
+        </section>
+        
+
+        
+    </div>
+
+    <footer>
+        <nav class="bottom-nav">
+            <a href="#home" class="bottom-icon">
+                <i class="fi fi-sr-home"></i> <!-- Home Icon -->
+            </a>
+            <a href="#games" class="bottom-icon">
+                <i class="fi fi-sr-dice-alt"></i> <!-- Games Icon -->
+            </a>
+            <a href="#about" class="bottom-icon">
+                <i class="fi fi-sr-square-info"></i> <!-- About Icon -->
+            </a>
+            
+        </nav>
+    </footer>
+    
+    
+
+    <script>
+        // JavaScript to shrink the navbar on scroll
+        window.onscroll = function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shrink');
+            } else {
+                navbar.classList.remove('shrink');
+            }
+        };
+        
+        // Typewriter Effect
+        const text = "Zeathen Interactive"; // The text you want to display
+        let index = 0;
+        const speed = 100; // Typing speed in milliseconds
+
+        function typeWriter() {
+            const typewriterElement = document.getElementById('typewriter');
+            if (index < text.length) {
+                typewriterElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        // Start the typewriter effect on page load
+        window.onload = function() {
+            typeWriter();
+        };
+
+        const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+const numParticles = 40; // Number of particles
+
+// Create particles
+for (let i = 0; i < numParticles; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: 5, // Fixed radius for dots
+        color: 'rgba(255, 255, 255, 0.7)', // Dot color
+        speed: Math.random() * 2 + 0.5, // Random speed
+        direction: Math.random() * 2 * Math.PI // Random direction in radians
+    });
+}
+
+// Animation loop
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+    // Draw and update particles
+    particles.forEach((particle, index) => {
+        // Update position
+        particle.x += Math.cos(particle.direction) * particle.speed;
+        particle.y += Math.sin(particle.direction) * particle.speed;
+
+        // Wrap around
+        if (particle.x < 0) particle.x = canvas.width;
+        if (particle.x > canvas.width) particle.x = 0;
+        if (particle.y < 0) particle.y = canvas.height;
+        if (particle.y > canvas.height) particle.y = 0;
+
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        ctx.fillStyle = particle.color;
+        ctx.fill();
+
+        // Draw lines to nearby particles
+        for (let j = 0; j < particles.length; j++) {
+            if (index !== j) {
+                const distance = Math.hypot(particles[j].x - particle.x, particles[j].y - particle.y);
+                if (distance < 100) { // Adjust distance threshold as needed
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'; // Line color
+                    ctx.lineWidth = 1; // Line thickness
+                    ctx.beginPath();
+                    ctx.moveTo(particle.x, particle.y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    });
+
+    requestAnimationFrame(animate); // Request next frame
+}
+
+// Update canvas size on resize
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+// Start animation
+animate();
+
+    </script>
+</body>
+</html>

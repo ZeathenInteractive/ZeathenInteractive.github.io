@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
+/* General Styling */
+body {
+    text-decoration: none;
+    font-family: "Dosis", sans-serif;
+    background-color: #e7cbbe;
+    color: #1d415a;
+    margin: 0;
+    padding: 0;
+}
+
+/* Section Styling */
+section {
+    padding: 50px 20px; /* Add enough padding so that there's content to scroll */
+    text-align: center;
+    min-height: 50vh; /* Ensure sections are tall enough */
+}
+
+/* Footer */
+footer {
+    display: none;
+}
+
+/* Responsive Heading */
+h1 {
+    font-size: 5vw; /* Adjusts size based on screen width */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+/* Responsive Paragraph */
+p {
+    font-size: 1.5vw;
+    color: #555;
+}
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 8vw; /* Larger for smaller screens */
+    }
+
+    p {
+        font-size: 3vw;
+    }
+}
+
+/* Typewriter Effect */
+#typewriter {
+    border-right: 2px solid black; /* Simulates the blinking cursor */
+    width: fit-content;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: "Dosis", sans-serif;
+    font-size: 40px;
+    color: #333;
+    margin: 0 auto;
+    animation: blink 0.7s infinite step-end;
+}
+
+/* Blinking Cursor */
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
